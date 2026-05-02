@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logIng from "../server/logIn";
-import { useAuth } from "../context/AuthContext";
+import { useUserContext } from "../context/userContext";
 import { logInSchema } from "../schemas/logIn.schema"
 
-import type { LogInresponse } from "../types/login.type";
+import type { ResponseType } from "../types/logIn.singUp.type";
 
 export function useLogin() {
     const navigate = useNavigate();
-    const { setUser } = useAuth();
+    const { setUser } = useUserContext();
 
 
 
@@ -20,10 +20,10 @@ export function useLogin() {
 
     const [error, setError] = useState<ErrState | undefined>(undefined);
 
-    const handleError = (res: LogInresponse | undefined) => {
+    const handleError = (res: ResponseType | undefined) => {
 
-        const email = res?.typeError == "email" ? res.message : undefined
-        const password = res?.typeError == "password" ? res.message : undefined
+        const email = res?.err?.typeError == "email" ? res.err.message : undefined
+        const password = res?.err?.typeError == "password" ? res.err.message : undefined
 
         setError({ email, password });
     }
@@ -47,11 +47,10 @@ export function useLogin() {
                 return;
             }
 
-            if (res.AccessToken && res.RefreshToken && res.user) {
+            if (res.data?.user && res.data.AccessToken) {
                 setUser({
-                    AccessToken: res.AccessToken,
-                    RefreshToken: res.RefreshToken,
-                    user: res.user,
+                    AccessToken: res.data.AccessToken,
+                    user: res.data.user,
                 })
             }
 

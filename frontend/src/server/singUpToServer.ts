@@ -1,29 +1,30 @@
 
 const baseUrl = "http://localhost:3000";
-import type { LogInresponse } from "../types/login.type";
+import type { ResponseType } from "../types/logIn.singUp.type";
 
-export default async function logIng(email: string, password: string): Promise<LogInresponse | undefined> {
+export default async function singUpToServer(name: string, email: string, password: string): Promise<ResponseType | undefined> {
 
     try {
 
-        const res = await fetch(`${baseUrl}/login`, {
-            method: "Post",
+        const res = await fetch(`${baseUrl}/singUp`, {
+            method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
+                name,
                 email,
                 password
             })
-        })
+        });
 
         if (!res.ok) {
-            throw new Error("login filet")
+            throw new Error("sing up filet")
         }
 
-        const data: LogInresponse = await res.json();
+        const resdata: ResponseType = await res.json();
+        return resdata;
 
-        return data;
     } catch (err: any) {
         console.log(err.message);
 

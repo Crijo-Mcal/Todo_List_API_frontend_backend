@@ -1,21 +1,27 @@
 import type { Request, Response, NextFunction } from "express";
 import { AppError } from "../utility/AppError.js";
+import type { ResponseType } from "../types/bd_types.js";
 
-export default function HandleGlobalError(err: any, req: Request, res: Response, next: NextFunction) {
+export default function HandleGlobalError(err: any, req: Request, res: Response, next: NextFunction): void {
 
     if (err instanceof AppError) {
-        return res.status(err.statusCode).json({
+        res.status(err.statusCode).json({
             success: false,
-            typeError: err.typeError,
-            message: err.message
+            err: {
+                typeError: err.typeError,
+                message: err.message
+            }
         });
+        return
     }
 
     console.error(err.message);
 
-    return res.status(500).json({
+    res.status(500).json({
         success: false,
-        message: "Internal Server Error"
+        err: {
+            message: err.message
+        }
     });
 
 }

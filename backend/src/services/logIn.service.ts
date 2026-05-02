@@ -2,8 +2,9 @@ import logIn from "../db/login-SingUp/logIn.js";
 
 import { createAccessToken, createRefreshToken } from "../utility/jwtToken.js";
 import { insert_RefreshToken, update_RefreshToken, isRefreshTokenExist } from "../db/login-SingUp/insert_RefreshToken.js";
+import type { ResponseType } from "../types/bd_types.js";
 
-export default async function logInService(email: string, password: string): Promise<object> {
+export default async function logInService(email: string, password: string): Promise<ResponseType> {
 
     try {
         const client = await logIn(email, password)
@@ -20,7 +21,7 @@ export default async function logInService(email: string, password: string): Pro
 
 
         return {
-            AccessToken, RefreshToken, success: true, user: { id: client.id, name: client.name, email: client.email }
+            RefreshToken, data: { AccessToken, user: { id: client.id, name: client.name, email: client.email } }
         }
     } catch (err: any) {
         throw err;

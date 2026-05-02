@@ -1,8 +1,8 @@
 
 const baseUrl = "http://localhost:3000";
-import type { LogInresponse } from "../types/login.type";
+import type { ResponseType } from "../types/logIn.singUp.type";
 
-export default async function logIng(email: string, password: string): Promise<LogInresponse | undefined> {
+export default async function logIng(email: string, password: string): Promise<ResponseType | undefined> {
 
     try {
 
@@ -21,12 +21,11 @@ export default async function logIng(email: string, password: string): Promise<L
             throw new Error("login filet")
         }
 
-        const data: LogInresponse = await res.json();
+        const data: ResponseType = await res.json();
 
         return data;
     } catch (err: any) {
-        console.log(err.message);
-
+        console.error(err.message);
     }
 
 }

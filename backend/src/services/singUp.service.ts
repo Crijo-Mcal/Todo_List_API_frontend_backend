@@ -24,7 +24,7 @@ export default async function singUpService(name: string, email: string, passwor
     } catch (err: any) {
 
         if (err.code === '23505') {
-            throw new AppError("email already used", email)
+            throw new AppError("email already used", "email")
         }
         throw err
     }

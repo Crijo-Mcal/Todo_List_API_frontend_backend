@@ -17,7 +17,6 @@ export interface ErrInfo {
 export interface ResponseType {
     success?: boolean,
     err?: ErrInfo,
-    RefreshToken?: string
     data?: Data
 }
 

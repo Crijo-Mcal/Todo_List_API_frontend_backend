@@ -15,7 +15,9 @@ export default async function logInController(req: Request, res: Response, next:
             })
         }
 
-        res.status(200).json(responseLogIn)
+
+
+        res.status(200).json({ success: true, data: responseLogIn.data })
 
     } catch (err: any) {
         next(err)
