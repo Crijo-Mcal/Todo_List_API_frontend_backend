@@ -41,6 +41,8 @@ export function useLogin() {
 
             const res = await logIng(email, password);
 
+            console.log(res);
+
             /* validation db */
             if (!res?.success) {
                 handleError(res);
@@ -50,7 +52,11 @@ export function useLogin() {
             if (res.data?.user && res.data.AccessToken) {
                 setUser({
                     AccessToken: res.data.AccessToken,
-                    user: res.data.user,
+                    dataUser: {
+                        id: res.data.user.id,
+                        name: res.data.user.name.toUpperCase(),
+                        email: res.data.user.email
+                    },
                 })
             }
 

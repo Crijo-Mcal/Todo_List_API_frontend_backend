@@ -5,7 +5,6 @@ import type { ResponseType } from "../types/logIn.singUp.type";
 export default async function logIng(email: string, password: string): Promise<ResponseType | undefined> {
 
     try {
-
         const res = await fetch(`${baseUrl}/login`, {
             method: "Post",
             headers: {
@@ -16,16 +15,20 @@ export default async function logIng(email: string, password: string): Promise<R
                 password
             })
         })
+        const resData: ResponseType = await res.json();
 
         if (!res.ok) {
-            throw new Error("login filet")
+            return {
+                success: resData.success,
+                err: resData.err
+            }
         }
+        return {
+            success: resData.success,
+            data: resData.data
+        };
 
-        const data: ResponseType = await res.json();
-
-        return data;
     } catch (err: any) {
         console.error(err.message);
     }
-
 }

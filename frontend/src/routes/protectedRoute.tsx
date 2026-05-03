@@ -1,4 +1,4 @@
-import {useUserContext} from "./userContext";
+import {useUserContext} from "../context/userContext";
 import {Navigate, Outlet} from "react-router-dom";
 
 export function ProtectedRoute() {

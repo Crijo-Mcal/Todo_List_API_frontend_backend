@@ -2,7 +2,7 @@ import {Routes, Route, Navigate} from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import DashboardPage from "./pages/DashboardPage";
-import {ProtectedRoute} from "./context/protectedRoute";
+import {ProtectedRoute} from "./routes/protectedRoute";
 
 function App() {
   return (

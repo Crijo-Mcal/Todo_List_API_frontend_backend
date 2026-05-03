@@ -6,7 +6,17 @@ export default async function singUpController(req: Request, res: Response, next
         const { name, email, password } = req.body;
         const responsesingUp = await singUpService(name, email, password);
 
-        res.json(responsesingUp);
+
+        if (responsesingUp?.RefreshToken) {
+            res.cookie("refreshToken", responsesingUp.RefreshToken, {
+                httpOnly: true,
+                secure: true,
+                sameSite: "strict",
+            })
+        }
+
+        res.status(200).json({ success: true, data: responsesingUp.data })
+
         return;
 
     } catch (err: any) {

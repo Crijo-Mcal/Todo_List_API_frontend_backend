@@ -18,12 +18,19 @@ export default async function singUpToServer(name: string, email: string, passwo
             })
         });
 
+        const resData: ResponseType = await res.json();
+
         if (!res.ok) {
-            throw new Error("sing up filet")
+            return {
+                success: resData.success,
+                err: resData.err
+            }
         }
 
-        const resdata: ResponseType = await res.json();
-        return resdata;
+        return {
+            success: resData.success,
+            data: resData.data
+        };
 
     } catch (err: any) {
         console.log(err.message);

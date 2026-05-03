@@ -3,7 +3,7 @@ import type {User} from "../types/logIn.singUp.type";
 
 type UserInfo = {
   AccessToken: string;
-  user: User;
+  dataUser: User;
 };
 
 type AuthType = {

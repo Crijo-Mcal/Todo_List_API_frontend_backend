@@ -3,10 +3,10 @@ export class AppError extends Error {
     isOperational: boolean;
     typeError: string;
 
-    constructor(message: string, typeError: string) {
+    constructor(message: string, typeError: string, statusCode: number) {
         super(message);
         this.typeError = typeError;
-        this.statusCode = 200;
+        this.statusCode = statusCode;
         this.isOperational = true
     }
 

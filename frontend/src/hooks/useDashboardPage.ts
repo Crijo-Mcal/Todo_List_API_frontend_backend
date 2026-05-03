@@ -1,2 +1,8 @@
+import { useUserContext } from "../context/userContext"
 
-export function useDashboardPage() { }
+export function useDashboardPage() {
+    const user = useUserContext();
+
+
+    return { User: user.User }
+}

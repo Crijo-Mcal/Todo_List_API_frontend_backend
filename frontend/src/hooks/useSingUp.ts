@@ -48,7 +48,11 @@ export function useSingUp() {
         if (res?.data?.user && res.data.AccessToken) {
             setUser({
                 AccessToken: res.data.AccessToken,
-                user: res.data.user
+                dataUser: {
+                    id: res.data.user.id,
+                    name: res.data.user.name.toUpperCase(),
+                    email: res.data.user.email
+                },
             })
         }
 

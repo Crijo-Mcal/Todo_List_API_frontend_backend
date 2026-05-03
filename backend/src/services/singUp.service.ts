@@ -11,20 +11,21 @@ export default async function singUpService(name: string, email: string, passwor
 
     try {
         const hash_password = await hash(password);
-        await singUp_db(name, email, hash_password)
+        const client = await singUp_db(name, email, hash_password)
 
-        /* log in immediately after signUp */
-        const client = await logIn(email, password)
         const AccessToken = createAccessToken(client.id, client.email);
         const RefreshToken = createRefreshToken();
 
         insert_RefreshToken(RefreshToken, client.id);
-        return { AccessToken, RefreshToken, success: true, user: { id: client.id, name: client.name, email: client.email } }
+
+        return {
+            RefreshToken, data: { AccessToken, user: { id: client.id, name: client.name, email: client.email } }
+        }
 
     } catch (err: any) {
 
         if (err.code === '23505') {
-            throw new AppError("email already used", "email")
+            throw new AppError("email already used", "email", 400)
         }
         throw err
     }
