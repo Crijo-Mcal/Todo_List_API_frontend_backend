@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from "express";
-import { logInValidationSchema } from "../schema/userValidation.js";
+import { logInValidationSchema } from "../../schema/userValidation.js";
 
 
 export function logInValidation(req: Request, res: Response, next: NextFunction): void {

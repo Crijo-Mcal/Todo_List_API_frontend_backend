@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from "express";
-import { AppError } from "../utility/AppError.js";
+import { AppError } from "../error/AppError.js";
 import type { ResponseType } from "../types/bd_types.js";
 
 export default function HandleGlobalError(err: any, req: Request, res: Response, next: NextFunction): void {
@@ -15,13 +15,17 @@ export default function HandleGlobalError(err: any, req: Request, res: Response,
         return
     }
 
-    console.error(err.message);
+    if (err.name == "JsonWebTokenError") {
+        res.status(401).json({
+            success: false,
+            err: {
+                message: "invalid token"
+            }
+        });
+        return
+    }
 
-    res.status(500).json({
-        success: false,
-        err: {
-            message: err.message
-        }
-    });
+
+    console.error(err.message);
 
 }

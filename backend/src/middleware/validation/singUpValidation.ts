@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from "express";
-import { singUpValidationSchema } from "../schema/userValidation.js";
+import { singUpValidationSchema } from "../../schema/userValidation.js";
 
 
 export function singUpValidation(req: Request, res: Response, next: NextFunction): void {

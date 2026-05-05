@@ -1,6 +1,6 @@
 import { pool } from "../connection.js"
 import { compareHashPassword } from "../../utility/bcrypt.js";
-import { AppError } from "../../utility/AppError.js"
+import { AppError } from "../../error/AppError.js"
 
 
 export type Clien_Data = {

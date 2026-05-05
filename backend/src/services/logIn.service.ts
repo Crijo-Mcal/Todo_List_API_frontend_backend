@@ -1,7 +1,7 @@
-import logIn from "../db/login-SingUp/logIn.js";
+import logIn from "../db/client/logIn.js";
 
 import { createAccessToken, createRefreshToken } from "../utility/jwtToken.js";
-import { insert_RefreshToken, update_RefreshToken, isRefreshTokenExist } from "../db/login-SingUp/insert_RefreshToken.js";
+import { insert_RefreshToken, update_RefreshToken, isRefreshTokenExist } from "../db/client/insert_RefreshToken.js";
 import type { ResponseType } from "../types/bd_types.js";
 
 export default async function logInService(email: string, password: string): Promise<ResponseType> {

@@ -1,11 +1,11 @@
-import singUp_db from "../db/login-SingUp/singUp.db.js"
+import singUp_db from "../db/client/singUp.db.js"
 import { hash } from "../utility/bcrypt.js";
-import { AppError } from "../utility/AppError.js";
+import { AppError } from "../error/AppError.js";
 
 /* logint */
-import logIn from "../db/login-SingUp/logIn.js";
+import logIn from "../db/client/logIn.js";
 import { createAccessToken, createRefreshToken } from "../utility/jwtToken.js";
-import { insert_RefreshToken, update_RefreshToken, isRefreshTokenExist } from "../db/login-SingUp/insert_RefreshToken.js";
+import { insert_RefreshToken, update_RefreshToken, isRefreshTokenExist } from "../db/client/insert_RefreshToken.js";
 
 export default async function singUpService(name: string, email: string, password: string) {
 
